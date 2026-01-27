@@ -36,7 +36,7 @@ yarn install
 yarn run dev
 ```
 
-Acesse: `http://localhost:5173`
+Acesse (url): `http://localhost:5173`
 
 ---
 
@@ -176,6 +176,9 @@ npm run lint     # Verificar código
 
   yarn playwright test example
     #Runs the tests in a specific file.
+
+  yarn playwright codegen <url>
+    #Runs the inspect elements
 
   yarn playwright test --debug
     #Runs the tests in debug mode.
