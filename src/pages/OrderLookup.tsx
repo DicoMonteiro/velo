@@ -90,7 +90,7 @@ const OrderLookup = () => {
                 <Label htmlFor="order-id">Número do Pedido</Label>
                 <Input
                   id="order-id"
-                  data-testid="search-order-id"
+                  //data-testid="search-order-id"
                   type="text"
                   placeholder="Ex: VLO-ABC123"
                   value={orderId}
@@ -137,7 +137,7 @@ const OrderLookup = () => {
 
         {/* Order Result */}
         {searchedOrder && (
-          <Card className="animate-fade-in" data-testid={`order-result-${searchedOrder.id}`}>
+          <Card className="animate-fade-in"> {/*data-testid={`order-result-${searchedOrder.id}`}*/}
             <CardHeader>
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">

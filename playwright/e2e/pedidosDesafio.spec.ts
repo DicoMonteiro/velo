@@ -14,13 +14,15 @@ test('deve consultar um pedido aprovado', async ({ page }) => {
   await expect(page.getByRole('heading')).toContainText('Consultar Pedido');
 
   //Act
-  await page.getByTestId('search-order-id').dblclick();
-  await page.getByTestId('search-order-id').fill('VLO-OPHS0J');
+  await page.getByRole('textbox', { name: 'Número do Pedido' }).fill('VLO-OPHS0J');
   await page.getByRole('button', { name: 'Buscar Pedido' }).click();
 
   //Assert - Checkpoint
   await expect(page.getByText('APROVADO')).toBeVisible({ timeout: 15000 });
   await expect(page.getByText('VLO-OPHS0J')).toBeVisible({ timeout: 15000 });
+  await expect(page.locator('#root')).toContainText('VLO-OPHS0J');
+  await expect(page.locator('#root')).toContainText('APROVADO');
+  
   await expect(page.getByText('Velô Sprint')).toBeVisible({ timeout: 15000 });
   await expect(page.getByText('Midnight Black')).toBeVisible({ timeout: 15000 });
   await expect(page.getByText('sport Wheels')).toBeVisible({ timeout: 15000 });
