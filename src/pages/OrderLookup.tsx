@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { Search, Package, CheckCircle, XCircle, Loader2 } from 'lucide-react';
+import { useState, type SVGProps } from 'react';
+import { Search, Package, CircleCheckBig, CircleX, XCircle, Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -35,6 +35,23 @@ const colorLabels: Record<ExteriorColor, string> = {
   'lunar-white': 'Lunar White',
   'midnight-black': 'Midnight Black',
 };
+
+const CircleClock = (props: SVGProps<SVGSVGElement>) => (
+  <svg
+    {...props}
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className={`lucide lucide-circle-clock ${props.className ?? ''}`}
+  >
+    <circle cx="12" cy="12" r="10" />
+    <polyline points="12 6 12 12 16 14" />
+  </svg>
+);
 
 const OrderLookup = () => {
   const [orderId, setOrderId] = useState('');
@@ -150,17 +167,22 @@ const OrderLookup = () => {
                   </div>
                 </div>
                 <div
+                  role="status"
                   data-testid="order-result-status"
                   className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium ${
                     searchedOrder.status === 'APROVADO'
                       ? 'bg-green-100 text-green-700'
-                      : 'bg-red-100 text-red-700'
+                      : searchedOrder.status === 'REPROVADO'
+                        ? 'bg-red-100 text-red-700'
+                        : 'bg-amber-100 text-amber-700'
                   }`}
                 >
                   {searchedOrder.status === 'APROVADO' ? (
-                    <CheckCircle className="w-4 h-4" />
+                    <CircleCheckBig className="w-4 h-4" />
+                  ) : searchedOrder.status === 'REPROVADO' ? (
+                    <CircleX className="w-4 h-4" />
                   ) : (
-                    <XCircle className="w-4 h-4" />
+                    <CircleClock className="w-4 h-4" />
                   )}
                   {searchedOrder.status}
                 </div>
