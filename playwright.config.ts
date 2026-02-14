@@ -44,7 +44,9 @@ export default defineConfig({
 
     // Tempo maximo para navegation como goto(), waitForURL()
     // Quando o valor é 0, herda o limite do timeout geral do teste
-    navigationTimeout: 10_000
+    navigationTimeout: 10_000,
+
+    baseURL: 'http://localhost:5173'
   },
 
   /* Configure projects for major browsers */

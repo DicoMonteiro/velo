@@ -1,10 +1,12 @@
 import { test, expect } from '@playwright/test';
 import { generateOrderCode } from "../support/helpers"
+import { SearchOrderPage } from "../support/pages/SearchOrderPage"
 
 // AAA - Arrange, Act, Assert
 
 test.describe("Consulta de Pedido", ()=> {
 
+  let search: SearchOrderPage;
   //test.beforeAll(async () => {
   //  console.log("beforeAll: roda uma vez antes de todos os testes")
   //})
@@ -16,6 +18,8 @@ test.describe("Consulta de Pedido", ()=> {
      await expect(page.getByTestId('hero-section').getByRole('heading')).toContainText('Velô Sprint');
      await page.getByRole('link', { name: 'Consultar Pedido' }).click();
      await expect(page.getByRole('heading')).toContainText('Consultar Pedido');
+
+     search = new SearchOrderPage(page);
   })
 
   //test.afterEach(async () => {
@@ -47,15 +51,21 @@ test.describe("Consulta de Pedido", ()=> {
     }
   
     //Act
-    await page.getByTestId('search-order-id').dblclick();
-    await page.getByTestId('search-order-id').fill(order.code);
+    //await page.getByTestId('search-order-id').dblclick();
+    //await page.getByTestId('search-order-id').fill(order.code);
+    //await page.getByRole('button', { name: 'Buscar Pedido' }).click();
+
+
     //await page.locator('//label[text()="Número do Pedido"]/..//input').fill('VLO-OPHS0J');
     //await page.getByTestId('search[-order-id').press('Enter');
     //await page.getByRole('textbox', { name: "Consultar Pedido"}).fill('VLO-OPHS0J');
     //await page.getByLabel('Número do Pedido').fill('VLO-OPHS0J');
     //await page.getByPlaceholder('Ex: VLO-ABC123').fill('VLO-OPHS0J');
     //await page.getByTestId('search-order-button').click();
-    await page.getByRole('button', { name: 'Buscar Pedido' }).click();
+    
+
+    //const search = new SearchOrderPage(page)
+    await search.searchOrder(order.code)
   
     //Assert - Checkpoint
     //await page.waitForTimeout(10000);
@@ -136,9 +146,12 @@ test.describe("Consulta de Pedido", ()=> {
       }
     }
     //Act
-    await page.getByTestId('search-order-id').dblclick();
-    await page.getByTestId('search-order-id').fill(order.code);
-    await page.getByRole('button', { name: 'Buscar Pedido' }).click();
+    //await page.getByTestId('search-order-id').dblclick();
+    //await page.getByTestId('search-order-id').fill(order.code);
+    //await page.getByRole('button', { name: 'Buscar Pedido' }).click();
+
+    //const search = new SearchOrderPage(page)
+    await search.searchOrder(order.code)
   
     //Assert - Checkpoint
     await expect(page.getByTestId(`order-result-${order.code}`)).toMatchAriaSnapshot(`
@@ -203,9 +216,12 @@ test.describe("Consulta de Pedido", ()=> {
       }
     }
     //Act
-    await page.getByTestId('search-order-id').dblclick();
-    await page.getByTestId('search-order-id').fill(order.code);
-    await page.getByRole('button', { name: 'Buscar Pedido' }).click();
+    //await page.getByTestId('search-order-id').dblclick();
+    //await page.getByTestId('search-order-id').fill(order.code);
+    //await page.getByRole('button', { name: 'Buscar Pedido' }).click();
+
+    //const search = new SearchOrderPage(page)
+    await search.searchOrder(order.code)
   
     //Assert - Checkpoint
     await expect(page.getByTestId(`order-result-${order.code}`)).toMatchAriaSnapshot(`
@@ -256,9 +272,12 @@ test.describe("Consulta de Pedido", ()=> {
     const order = generateOrderCode();
   
     //Act
-    await page.getByTestId('search-order-id').dblclick();
-    await page.getByTestId('search-order-id').fill(order);
-    await page.getByRole('button', { name: 'Buscar Pedido' }).click();
+    //await page.getByTestId('search-order-id').dblclick();
+    //await page.getByTestId('search-order-id').fill(order);
+    //await page.getByRole('button', { name: 'Buscar Pedido' }).click();
+
+    //const search = new SearchOrderPage(page)
+    await search.searchOrder(order)
   
     //Assert - Checkpoint
     await expect(page.getByRole('heading', { name: 'Pedido não encontrado' })).toBeVisible({ timeout: 15000 })
