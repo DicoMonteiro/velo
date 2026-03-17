@@ -5,9 +5,10 @@ import { orders, statusConfig } from '../fixture/datas/dataOrders';
 // AAA - Arrange, Act, Assert
 
 test.describe("Consulta de Pedido", ()=> {
-  test.beforeEach(async ({ homePage }) => {
+  test.beforeEach(async ({ homePage, navBar }) => {
     //Arrange
-    await homePage.gotoAndNavigateToSearchOrder()
+    await homePage.goto()
+    await navBar.navigateToSearchOrder()
   })
 
   test('deve consultar um pedido aprovado', async ({ searchOrderPage }) => {
