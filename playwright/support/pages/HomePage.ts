@@ -13,4 +13,9 @@ export class HomePage {
     await this.page.goto('/');
     await expect(this.heroHeading).toContainText('Velô Sprint');
   }
+
+  async navigateToConfigureVehicle() {
+    await this.page.getByRole('link', { name: 'Configure Agora' }).click();
+    await expect(this.page).toHaveURL(/.*configure/);
+  }
 }

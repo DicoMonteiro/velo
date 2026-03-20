@@ -1,54 +1,44 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from '../fixture/fixture';
+import { vehicleData } from '../fixture/datas/dataVehicle';
 
 test.describe('Configuração do Veículo e Cálculo do Preço Base', () => {
 
-  test.beforeEach(async ({ page }) => {
-    // Acessar a página inicial e navegar para o configurador
-    await page.goto('/');
-
-    // Checkpoint: Validar estado inicial da página antes de interagir
-    await expect(page.getByRole('link', { name: 'Configure Agora' })).toBeVisible();
-    await page.getByRole('link', { name: 'Configure Agora' }).click();
-
-    // Checkpoint: Validar redirecionamento para o configurador e carregamento
-    await expect(page).toHaveURL(/.*configure/);
-
-    // Passo 1: Verificar o preço inicial de venda
-    await expect(page.getByText('R$ 40.000,00')).toBeVisible();
-
+  test.beforeEach(async ({ homePage }) => {
+    // Arrange
+    await homePage.goto();
+    await homePage.navigateToConfigureVehicle();
   });
 
-  test('deve manter o preço ao alterar a cor do veículo e verifica alteração da imagem do veículo', async ({ page }) => {
-    let imageCar = page.locator('img[alt^="Velô Sprint"]');
+  test('deve manter o preço ao alterar a cor do veículo e verifica alteração da imagem do veículo', async ({ configureVehiclePage }) => {
+    // Test Data
+    const { prices, colors } = vehicleData;
+    const color = colors.midnightBlack;
 
-    // Passo: Selecionar a cor "Midnight Black"
-    await page.getByRole('button', { name: 'Midnight Black' }).click();
+    // Act
+    await configureVehiclePage.selectColor(color.name);
 
-    // Checkpoint: O preço permanece R$ 40.000,00
-    await expect(page.getByText('R$ 40.000,00')).toBeVisible();
-
-    await expect(imageCar).toHaveAttribute('src', '/src/assets/midnight-black-aero-wheels.png');
-
+    // Assert - Checkpoint
+    await configureVehiclePage.validatePrice(prices.base);
+    await configureVehiclePage.validateCarImage(color.aeroWheelsImageSrc);
   });
 
-  test('deve atualizar o preço ao alterar a roda do veículo e verifica alteração da imagem do veículo', async ({ page }) => {
-    let imageCar = page.locator('img[alt^="Velô Sprint"]');
+  test('deve atualizar o preço ao alterar a roda do veículo e verifica alteração da imagem do veículo', async ({ configureVehiclePage }) => {
+    // Test Data
+    const { prices, colors, wheels } = vehicleData;
+    const color = colors.glacierBlue; // O default parece ser glacierBlue já que o step de voltar para default tem a imagem `glacier-blue-aero-wheels`
 
-    // Passo: Selecionar a opção de roda "Sport Wheels"
-    await page.getByRole('button', { name: 'Sport Wheels' }).click();
+    // Act - Change to sport
+    await configureVehiclePage.selectWheels(wheels.sport);
 
-    // Checkpoint: O preço total é atualizado com acréscimo de R$ 2.000,00
-    await expect(page.getByText('R$ 42.000,00')).toBeVisible();
+    // Assert - Checkpoint
+    await configureVehiclePage.validatePrice(prices.withSportWheels);
+    await configureVehiclePage.validateCarImage(color.sportWheelsImageSrc);
 
+    // Act - Revert to aero
+    await configureVehiclePage.selectWheels(wheels.aero);
 
-    await expect(imageCar).toHaveAttribute('src', '/src/assets/glacier-blue-sport-wheels.png');
-
-    // Passo: Selecionar novamente a roda "Aero Wheels"
-    await page.getByRole('button', { name: 'Aero Wheels' }).click();
-
-    // Checkpoint: O preço total é decrementado em R$ 2.000,00, voltando para R$ 40.000,00
-    await expect(page.getByText('R$ 40.000,00')).toBeVisible();
-
-    await expect(imageCar).toHaveAttribute('src', '/src/assets/glacier-blue-aero-wheels.png');
+    // Assert - Checkpoint
+    await configureVehiclePage.validatePrice(prices.base);
+    await configureVehiclePage.validateCarImage(color.aeroWheelsImageSrc);
   });
 });
