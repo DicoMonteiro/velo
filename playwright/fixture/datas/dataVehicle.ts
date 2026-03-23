@@ -17,5 +17,15 @@ export const vehicleData = {
   wheels: {
     sport: 'Sport Wheels',
     aero: 'Aero Wheels'
+  },
+  optionals: {
+    precisionPark: {
+      name: 'Precision Park',
+      price: 'R$ 45.500,00'
+    },
+    fluxCapacitor: {
+      name: 'Flux Capacitor',
+      price: 'R$ 50.500,00'
+    }
   }
 };

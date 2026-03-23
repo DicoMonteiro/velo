@@ -25,6 +25,15 @@ export function createConfigureVehicleActions(page: Page) {
     async validateCarImage(imageSrc: string) {
       const imageCar = page.locator('img[alt^="Velô Sprint"]');
       await expect(imageCar).toHaveAttribute('src', imageSrc);
+    },
+
+    async toggleOptional(optionalName: string) {
+      await page.getByRole('checkbox', { name: optionalName }).click();
+    },
+
+    async goToCheckout() {
+      await page.getByRole('button', { name: 'Monte o Seu' }).click();
+      await expect(page).toHaveURL(/.*order/);
     }
   }
 }
