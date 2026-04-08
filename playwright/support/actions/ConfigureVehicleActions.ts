@@ -18,8 +18,10 @@ export function createConfigureVehicleActions(page: Page) {
       await page.getByRole('button', { name: wheelsName }).click();
     },
 
-    async validatePrice(expectedPrice: string) {
-      await expect(page.getByText(expectedPrice)).toBeVisible();
+    async expectPrice(price: string) {
+      const priceElement = page.getByTestId('total-price')
+      await expect(priceElement).toBeVisible()
+      await expect(priceElement).toHaveText(price)
     },
 
     async validateCarImage(imageSrc: string) {
@@ -34,6 +36,10 @@ export function createConfigureVehicleActions(page: Page) {
     async goToCheckout() {
       await page.getByRole('button', { name: 'Monte o Seu' }).click();
       await expect(page).toHaveURL(/.*order/);
-    }
+    },
+
+    async finishConfigurator() {
+      await page.getByRole('button', { name: 'Monte o Seu' }).click()
+    },
   }
 }

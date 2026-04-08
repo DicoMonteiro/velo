@@ -17,7 +17,7 @@ test.describe('Configuração do Veículo e Cálculo do Preço Base', () => {
     await app.configureVehicle.selectColor(color.name);
 
     // Assert - Checkpoint
-    await app.configureVehicle.validatePrice(prices.base);
+    await app.configureVehicle.expectPrice(prices.base);
     await app.configureVehicle.validateCarImage(color.aeroWheelsImageSrc);
   });
 
@@ -30,14 +30,14 @@ test.describe('Configuração do Veículo e Cálculo do Preço Base', () => {
     await app.configureVehicle.selectWheels(wheels.sport);
 
     // Assert - Checkpoint
-    await app.configureVehicle.validatePrice(prices.withSportWheels);
+    await app.configureVehicle.expectPrice(prices.withSportWheels);
     await app.configureVehicle.validateCarImage(color.sportWheelsImageSrc);
 
     // Act - Revert to aero
     await app.configureVehicle.selectWheels(wheels.aero);
 
     // Assert - Checkpoint
-    await app.configureVehicle.validatePrice(prices.base);
+    await app.configureVehicle.expectPrice(prices.base);
     await app.configureVehicle.validateCarImage(color.aeroWheelsImageSrc);
   });
 });

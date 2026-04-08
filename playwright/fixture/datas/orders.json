@@ -1,0 +1,44 @@
+{
+    "aprovado": {
+        "number": "VLO-OPHS0J",
+        "status": "APROVADO",
+        "color": "Midnight Black",
+        "wheels": "sport Wheels",
+        "customer": {
+            "name": "Pedro Amado",
+            "email": "pedro.amado@qax.com.br",
+            "document": "123.456.778-99",
+            "phone": "(11) 98189-0765"
+        },
+        "payment": "À Vista",
+        "total_price": "52500"
+    },
+    "reprovado": {
+        "number": "VLO-165ZEY",
+        "status": "REPROVADO",
+        "color": "Lunar White",
+        "wheels": "aero Wheels",
+        "customer": {
+            "name": "Apolo Vale",
+            "email": "apolo.vale@teste.com.br",
+            "document": "098.564.131-90",
+            "phone": "(11) 98765-4109"
+        },
+        "payment": "À Vista",
+        "total_price": "45000"
+    },
+    "em_analise": {
+        "number": "VLO-BXFHDZ",
+        "status": "EM_ANALISE",
+        "color": "Lunar White",
+        "wheels": "aero Wheels",
+        "customer": {
+            "name": "Marcus Antunes",
+            "email": "marcus.antunes@teste.com.br",
+            "document": "123.679.045-30",
+            "phone": "(71) 99109-8654"
+        },
+        "payment": "À Vista",
+        "total_price": "40000"
+    }
+}

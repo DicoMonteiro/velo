@@ -7,8 +7,9 @@ export type OrderDetails = {
   status: OrderStatus
   color: string
   wheels: string
-  customer: { name: string; email: string }
+  customer: { name: string; email: string; document: string; phone: string }
   payment: string
+  total_price: string
 }
 
 export function createOrderLookupActions(page: Page) {
@@ -67,7 +68,7 @@ export function createOrderLookupActions(page: Page) {
       - paragraph: ${order.payment}
       - paragraph: /R\\$ \\d+\\.\\d+,\\d+/
       `
-      await expect(page.getByTestId(`order-result-${order.number}`)).toMatchAriaSnapshot(snapshot, { timeout: 60000})
+      await expect(page.getByTestId(`order-result-${order.number}`)).toMatchAriaSnapshot(snapshot, { timeout: 60000 })
     },
 
     async validateStatusBadge(status: OrderStatus) {

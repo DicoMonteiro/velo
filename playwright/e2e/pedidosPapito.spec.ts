@@ -1,24 +1,21 @@
 import { test, expect } from '../support/actionsFeature'
 import { generateOrderCode } from '../support/helpers'
 import type { OrderDetails } from '../support/actions/OrderLookupActions'
+import { insertOrder, deleteOrderByNumber } from '../support/database/orderRepository'
+
+import testData from '../fixture/datas/orders.json' with { type: 'json' }
 
 test.describe('Consulta de Pedido', () => {
+
   test.beforeEach(async ({ app }) => {
     await app.orderLookup.open()
   })
 
   test('deve consultar um pedido aprovado', async ({ app }) => {
-    const order: OrderDetails = {
-      number: 'VLO-OPHS0J',
-      status: 'APROVADO',
-      color: 'Midnight Black',
-      wheels: 'sport Wheels',
-      customer: {
-        name: 'Pedro Amado',
-        email: 'pedro.amado@qax.com.br'
-      },
-      payment: 'À Vista',
-    }
+    const order: OrderDetails = testData.aprovado as OrderDetails
+
+    await deleteOrderByNumber(order.number)
+    await insertOrder(order)
 
     await app.orderLookup.searchOrder(order.number)
     await app.orderLookup.validateOrderDetails(order)
@@ -26,17 +23,10 @@ test.describe('Consulta de Pedido', () => {
   })
 
   test('deve consultar um pedido reprovado', async ({ app }) => {
-    const order: OrderDetails = {
-      number: 'VLO-165ZEY',
-      status: 'REPROVADO',
-      color: 'Lunar White',
-      wheels: 'aero Wheels',
-      customer: {
-        name: 'Apolo Vale',
-        email: 'apolo.vale@teste.com.br'
-      },
-      payment: 'À Vista',
-    }
+    const order: OrderDetails = testData.reprovado as OrderDetails
+
+    await deleteOrderByNumber(order.number)
+    await insertOrder(order)
 
     await app.orderLookup.searchOrder(order.number)
     await app.orderLookup.validateOrderDetails(order)
@@ -44,17 +34,10 @@ test.describe('Consulta de Pedido', () => {
   })
 
   test('deve consultar um pedido em analise', async ({ app }) => {
-    const order: OrderDetails = {
-      number: 'VLO-BXFHDZ',
-      status: 'EM_ANALISE',
-      color: 'Lunar White',
-      wheels: 'aero Wheels',
-      customer: {
-        name: 'Marcus Antunes',
-        email: 'marcus.antunes@teste.com.br'
-      },
-      payment: 'À Vista',
-    }
+    const order: OrderDetails = testData.em_analise as OrderDetails
+
+    await deleteOrderByNumber(order.number)
+    await insertOrder(order)
 
     await app.orderLookup.searchOrder(order.number)
     await app.orderLookup.validateOrderDetails(order)
