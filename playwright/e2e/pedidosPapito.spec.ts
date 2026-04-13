@@ -1,6 +1,6 @@
 import { test, expect } from '../support/actionsFeature'
 import { generateOrderCode } from '../support/helpers'
-import type { OrderDetails } from '../support/actions/OrderLookupActions'
+import type { OrderDetails } from '../support/actions/orderLookupActions'
 import { insertOrder, deleteOrderByNumber } from '../support/database/orderRepository'
 
 import testData from '../fixture/datas/orders.json' with { type: 'json' }

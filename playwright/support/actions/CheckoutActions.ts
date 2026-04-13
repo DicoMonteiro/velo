@@ -22,6 +22,13 @@ export function createCheckoutActions(page: Page) {
             alerts
         },
 
+        async open() {
+            await page.goto('/')
+            const title = page.getByTestId('hero-section').getByRole('heading')
+            await expect(title).toContainText('Velô Sprint')
+            await page.getByRole('link', { name: /Configure Agora/i }).click()
+        },
+
         async expectLoaded() {
             await expect(page.getByRole('heading', { name: 'Finalizar Pedido' })).toBeVisible()
         },
@@ -60,5 +67,10 @@ export function createCheckoutActions(page: Page) {
         async submit() {
             await page.getByRole('button', { name: 'Confirmar Pedido' }).click()
         },
+
+        async validateOrderSuccess() {
+            await expect(page).toHaveURL(/\/success/)
+            await expect(page.getByRole('heading', { name: 'Pedido Aprovado!' })).toBeVisible()
+        }
     }
 }

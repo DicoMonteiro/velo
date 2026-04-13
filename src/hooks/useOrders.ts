@@ -30,7 +30,7 @@ function generateOrderNumber(): string {
 function dbOrderToOrder(dbOrder: DbOrder): Order {
   const nameParts = dbOrder.customer_name.split(' ');
   const firstName = nameParts[0] || '';
-  const surname = nameParts.slice(1).join(' ') || '';
+  const lastname = nameParts.slice(1).join(' ') || '';
 
   return {
     id: dbOrder.order_number,
@@ -43,7 +43,7 @@ function dbOrderToOrder(dbOrder: DbOrder): Order {
     totalPrice: Number(dbOrder.total_price),
     customer: {
       name: firstName,
-      surname: surname,
+      lastname: lastname,
       email: dbOrder.customer_email,
       phone: dbOrder.customer_phone,
       cpf: dbOrder.customer_cpf,
@@ -60,7 +60,7 @@ export async function createOrder(orderData: {
   totalPrice: number;
   customer: {
     name: string;
-    surname: string;
+    lastname: string;
     email: string;
     phone: string;
     cpf: string;
@@ -78,7 +78,7 @@ export async function createOrder(orderData: {
       color: orderData.configuration.exteriorColor,
       wheel_type: orderData.configuration.wheelType,
       optionals: orderData.configuration.optionals,
-      customer_name: `${orderData.customer.name} ${orderData.customer.surname}`,
+      customer_name: `${orderData.customer.name} ${orderData.customer.lastname}`,
       customer_email: orderData.customer.email,
       customer_phone: orderData.customer.phone,
       customer_cpf: orderData.customer.cpf,

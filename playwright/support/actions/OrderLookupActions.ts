@@ -7,9 +7,10 @@ export type OrderDetails = {
   status: OrderStatus
   color: string
   wheels: string
-  customer: { name: string; email: string; document: string; phone: string }
+  customer: { name: string; lastname: string; email: string; document: string; phone: string }
   payment: string
   total_price: string
+  store: string
 }
 
 export function createOrderLookupActions(page: Page) {
@@ -39,6 +40,7 @@ export function createOrderLookupActions(page: Page) {
     },
 
     async validateOrderDetails(order: OrderDetails) {
+      const fullName = `${order.customer.name} ${order.customer.lastname}`
       const snapshot = `
       - img
       - paragraph: Pedido
@@ -57,7 +59,7 @@ export function createOrderLookupActions(page: Page) {
       - paragraph: ${order.wheels}
       - heading "Dados do Cliente" [level=4]
       - paragraph: Nome
-      - paragraph: ${order.customer.name}
+      - paragraph: ${fullName}
       - paragraph: Email
       - paragraph: ${order.customer.email}
       - paragraph: Loja de Retirada

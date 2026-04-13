@@ -237,7 +237,7 @@ const Order = () => {
       totalPrice: finalPrice,
       customer: {
         name: formData.name,
-        surname: formData.lastname,
+        lastname: formData.lastname,
         email: formData.email,
         phone: formData.phone,
         cpf: formData.document,

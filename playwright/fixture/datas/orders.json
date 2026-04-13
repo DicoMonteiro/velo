@@ -5,13 +5,15 @@
         "color": "Midnight Black",
         "wheels": "sport Wheels",
         "customer": {
-            "name": "Pedro Amado",
+            "name": "Pedro",
+            "lastname": "Amado",
             "email": "pedro.amado@qax.com.br",
             "document": "123.456.778-99",
             "phone": "(11) 98189-0765"
         },
         "payment": "À Vista",
-        "total_price": "52500"
+        "total_price": "52500",
+        "store": ""
     },
     "reprovado": {
         "number": "VLO-165ZEY",
@@ -19,13 +21,15 @@
         "color": "Lunar White",
         "wheels": "aero Wheels",
         "customer": {
-            "name": "Apolo Vale",
+            "name": "Apolo",
+            "lastname": "Vale",
             "email": "apolo.vale@teste.com.br",
             "document": "098.564.131-90",
             "phone": "(11) 98765-4109"
         },
         "payment": "À Vista",
-        "total_price": "45000"
+        "total_price": "45000",
+        "store": ""
     },
     "em_analise": {
         "number": "VLO-BXFHDZ",
@@ -33,12 +37,94 @@
         "color": "Lunar White",
         "wheels": "aero Wheels",
         "customer": {
-            "name": "Marcus Antunes",
+            "name": "Marcus",
+            "lastname": "Antunes",
             "email": "marcus.antunes@teste.com.br",
             "document": "123.679.045-30",
             "phone": "(71) 99109-8654"
         },
         "payment": "À Vista",
-        "total_price": "40000"
+        "total_price": "40000",
+        "store": ""
+    },
+    "limitCaracteres": {
+        "number": "",
+        "status": "",
+        "color": "",
+        "wheels": "",
+        "customer": {
+            "name": "A",
+            "lastname": "B",
+            "email": "ab@teste.com",
+            "document": "33246612005",
+            "phone": "(11) 99999-9999"
+        },
+        "payment": "À Vista",
+        "total_price": "R$ 40.000,00",
+        "store": "Velô Paulista"
+    },
+    "emailInvalido": {
+        "number": "",
+        "status": "",
+        "color": "",
+        "wheels": "",
+        "customer": {
+            "name": "Adilson",
+            "lastname": "Nunes",
+            "email": "adilson.nunes@.com",
+            "document": "38935502081",
+            "phone": "(11) 99999-9999"
+        },
+        "payment": "À Vista",
+        "total_price": "R$ 40.000,00",
+        "store": "Velô Paulista"
+    },
+    "documentInvalido": {
+        "number": "",
+        "status": "",
+        "color": "",
+        "wheels": "",
+        "customer": {
+            "name": "Julia",
+            "lastname": "Simoes",
+            "email": "julia.simoes@tteste.com",
+            "document": "00000014199",
+            "phone": "(11) 99999-9999"
+        },
+        "payment": "À Vista",
+        "total_price": "R$ 40.000,00",
+        "store": "Velô Paulista"
+    },
+    "semTermoAceito": {
+        "number": "",
+        "status": "",
+        "color": "",
+        "wheels": "",
+        "customer": {
+            "name": "Paula",
+            "lastname": "Duarte",
+            "email": "paula.duarte@teste.com",
+            "document": "34917591023",
+            "phone": "(11) 99999-9999"
+        },
+        "payment": "À Vista",
+        "total_price": "R$ 40.000,00",
+        "store": "Velô Paulista"
+    },
+    "e2e": {
+        "number": "",
+        "status": "",
+        "color": "",
+        "wheels": "",
+        "customer": {
+            "name": "Adriano",
+            "lastname": "Almeida",
+            "email": "adraino.almeida@teste.com",
+            "document": "05366127068",
+            "phone": "(11) 99999-9999"
+        },
+        "payment": "À Vista",
+        "total_price": "R$ 40.000,00",
+        "store": "Velô Paulista"
     }
 }

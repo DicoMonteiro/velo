@@ -1,8 +1,8 @@
 import { test as base } from '@playwright/test'
 
-import { createOrderLookupActions } from './actions/OrderLookupActions'
-import { createConfigureVehicleActions } from './actions/ConfigureVehicleActions'
-import { createCheckoutActions } from './actions/CheckoutActions'
+import { createOrderLookupActions } from './actions/orderLookupActions'
+import { createConfigureVehicleActions } from './actions/configureVehicleActions'
+import { createCheckoutActions } from './actions/checkoutActions'
 
 type App = {
   orderLookup: ReturnType<typeof createOrderLookupActions>

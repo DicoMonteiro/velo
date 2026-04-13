@@ -1,7 +1,7 @@
 import { db } from './database'
 import { OrderTable } from './schema'
 
-import { OrderDetails } from '../actions/OrderLookupActions'
+import { OrderDetails } from '../actions/orderLookupActions'
 
 import crypto from 'crypto'
 
@@ -22,7 +22,7 @@ export async function insertOrder(order: OrderDetails) {
         order_number: order.number,
         color: order.color.toLowerCase().replace(' ', '-'),
         wheel_type: order.wheels.replace(' Wheels', '').toLowerCase(),
-        customer_name: order.customer.name,
+        customer_name: `${order.customer.name}` + ` ${order.customer.lastname}`,
         customer_email: order.customer.email,
         customer_phone: order.customer.phone,
         customer_cpf: order.customer.document,
