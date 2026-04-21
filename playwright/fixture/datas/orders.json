@@ -126,5 +126,101 @@
         "payment": "À Vista",
         "total_price": "R$ 40.000,00",
         "store": "Velô Paulista"
+    },
+    "financiamento": {
+        "number": "",
+        "status": "",
+        "color": "",
+        "wheels": "",
+        "customer": {
+            "name": "Josimara",
+            "lastname": "Vale",
+            "email": "josimara.vale@teste.com",
+            "document": "46416330024",
+            "phone": "(11) 99999-9999"
+        },
+        "payment": "Financiamento",
+        "total_price": "R$ 40.000,00",
+        "store": "Velô Paulista"
+    },
+    "scoreMedio": {
+        "number": "",
+        "status": "",
+        "color": "",
+        "wheels": "",
+        "customer": {
+            "name": "Camilo",
+            "lastname": "Monteiro",
+            "email": "camilo@monteiro.com",
+            "document": "12109885009",
+            "phone": "(11) 99999-9999"
+        },
+        "payment": "Financiamento",
+        "total_price": "R$ 40.000,00",
+        "store": "Velô Paulista"
+    },
+    "scoreBaixoEntradaMenor50": {
+        "number": "",
+        "status": "",
+        "color": "",
+        "wheels": "",
+        "customer": {
+            "name": "Camila",
+            "lastname": "Farias",
+            "email": "camila.farias@testes.com",
+            "document": "61789097053",
+            "phone": "(11) 99999-9999"
+        },
+        "payment": "Financiamento",
+        "total_price": "R$ 40.000,00",
+        "store": "Velô Paulista"
+    },
+    "scoreBaixoSemEntrada": {
+        "number": "",
+        "status": "",
+        "color": "",
+        "wheels": "",
+        "customer": {
+            "name": "Paulo",
+            "lastname": "Silva",
+            "email": "paulo.silva@testes.com",
+            "document": "31247422062",
+            "phone": "(11) 99999-9999"
+        },
+        "payment": "Financiamento",
+        "total_price": "R$ 40.000,00",
+        "store": "Velô Paulista"
+    },
+    "scoreBaixoEntradaIgual50": {
+        "number": "",
+        "status": "",
+        "color": "",
+        "wheels": "",
+        "customer": {
+            "name": "Tina",
+            "lastname": "Tuner",
+            "email": "tina.tuner@testes.com",
+            "document": "75427050086",
+            "phone": "(11) 99999-9999"
+        },
+        "payment": "Financiamento",
+        "total_price": "R$ 40.000,00",
+        "store": "Velô Paulista"
+    },
+    "scoreBaixoEntradaMaior50": {
+        "number": "",
+        "status": "",
+        "color": "",
+        "wheels": "",
+        "customer": {
+            "name": "Clovis",
+            "lastname": "Dias",
+            "email": "clovis.dias@testes.com",
+            "document": "13470517088",
+            "phone": "(11) 99999-9999"
+        },
+        "payment": "Financiamento",
+        "total_price": "R$ 40.000,00",
+        "store": "Velô Paulista"
     }
 }

@@ -60,6 +60,10 @@ export function createCheckoutActions(page: Page) {
             await page.getByRole('button', { name: new RegExp(method, 'i') }).click()
         },
 
+        async fillDownPayment(value: string) {
+            await page.getByTestId('input-entry-value').fill(value)
+        },
+
         async acceptTerms() {
             await terms.check()
         },
@@ -68,9 +72,26 @@ export function createCheckoutActions(page: Page) {
             await page.getByRole('button', { name: 'Confirmar Pedido' }).click()
         },
 
-        async validateOrderSuccess() {
+        async validateOrderSuccess(textMessage: string) {
             await expect(page).toHaveURL(/\/success/)
-            await expect(page.getByRole('heading', { name: 'Pedido Aprovado!' })).toBeVisible()
+            await expect(page.getByRole('heading', { name: textMessage })).toBeVisible()
+        },
+
+        async getOrderId() {
+            return await page.getByTestId('order-id').innerText()
+        },
+
+        async mockCreditAnalysis(score: number) {
+            await page.route('**/functions/v1/credit-analysis', route => {
+                route.fulfill({
+                    status: 200,
+                    contentType: 'application/json',
+                    body: JSON.stringify({
+                        status: 'Done',
+                        score,
+                    }),
+                })
+            })
         }
     }
 }

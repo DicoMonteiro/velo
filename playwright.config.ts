@@ -17,7 +17,7 @@ dotenv.config({ path: path.resolve(__dirname, '.env') });
  */
 export default defineConfig({
   // Tempo máximo para cada teste completo (30 segundos é o padrão)
-  
+
   timeout: 60_000,
   // Tempo máximo para assertions (toBeVisible(), toHaveText()) 5 segundos
   expect: {

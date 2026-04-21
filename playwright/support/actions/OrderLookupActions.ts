@@ -39,6 +39,12 @@ export function createOrderLookupActions(page: Page) {
       await searchButton.click()
     },
 
+    //async expectResultLoaded(orderId: string) {
+    // O sistema possui um delay artificial de 7 segundos (setTimeout no OrderLookup.tsx)
+    // Estamos aguardando o card de resultado aparecer para garantir que a página carregou
+    //  await expect(page.getByTestId(`order-result-${orderId}`)).toBeVisible({ timeout: 15000 })
+    //},
+
     async validateOrderDetails(order: OrderDetails) {
       const fullName = `${order.customer.name} ${order.customer.lastname}`
       const snapshot = `
