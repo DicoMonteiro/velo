@@ -22,13 +22,6 @@ export function createCheckoutActions(page: Page) {
             alerts
         },
 
-        async open() {
-            await page.goto('/')
-            const title = page.getByTestId('hero-section').getByRole('heading')
-            await expect(title).toContainText('Velô Sprint')
-            await page.getByRole('link', { name: /Configure Agora/i }).click()
-        },
-
         async expectLoaded() {
             await expect(page.getByRole('heading', { name: 'Finalizar Pedido' })).toBeVisible()
         },
@@ -72,26 +65,13 @@ export function createCheckoutActions(page: Page) {
             await page.getByRole('button', { name: 'Confirmar Pedido' }).click()
         },
 
-        async validateOrderSuccess(textMessage: string) {
+        async expectResult(textMessage: string) {
             await expect(page).toHaveURL(/\/success/)
             await expect(page.getByRole('heading', { name: textMessage })).toBeVisible()
         },
 
         async getOrderId() {
             return await page.getByTestId('order-id').innerText()
-        },
-
-        async mockCreditAnalysis(score: number) {
-            await page.route('**/functions/v1/credit-analysis', route => {
-                route.fulfill({
-                    status: 200,
-                    contentType: 'application/json',
-                    body: JSON.stringify({
-                        status: 'Done',
-                        score,
-                    }),
-                })
-            })
         }
     }
 }

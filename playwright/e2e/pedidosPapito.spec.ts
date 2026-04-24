@@ -7,8 +7,9 @@ import testData from '../fixture/datas/orders.json' with { type: 'json' }
 
 test.describe('Consulta de Pedido', () => {
 
-  test.beforeEach(async ({ app }) => {
-    await app.orderLookup.open()
+  test.beforeEach(async ({ page, app }) => {
+    await app.hero.open()
+    await app.orderLookup.openOrderConsultation()
   })
 
   test('deve consultar um pedido aprovado', async ({ app }) => {

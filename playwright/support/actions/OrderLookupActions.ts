@@ -25,11 +25,7 @@ export function createOrderLookupActions(page: Page) {
       searchButton
     },
 
-    async open() {
-      await page.goto('/')
-      const title = page.getByTestId('hero-section').getByRole('heading')
-      await expect(title).toContainText('Velô Sprint')
-
+    async openOrderConsultation() {
       await page.getByRole('link', { name: 'Consultar Pedido' }).click()
       await expect(page.getByRole('heading')).toContainText('Consultar Pedido')
     },

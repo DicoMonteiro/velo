@@ -3,9 +3,10 @@ import { vehicleData } from '../fixture/datas/dataVehicle';
 
 test.describe('Configuração do Veículo e Cálculo do Preço Base', () => {
 
-  test.beforeEach(async ({ app }) => {
+  test.beforeEach(async ({ page, app }) => {
     // Arrange
-    await app.configureVehicle.open();
+    await app.hero.open()
+    await page.getByRole('link', { name: /Configure Agora/i }).click()
   });
 
   test('deve manter o preço ao alterar a cor do veículo e verifica alteração da imagem do veículo', async ({ app }) => {

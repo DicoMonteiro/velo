@@ -3,9 +3,10 @@ import { vehicleData } from '../fixture/datas/dataVehicle';
 
 test.describe('Configuração do Veículo (Adição de Opcionais) e Cálculo de Preço', () => {
 
-  test.beforeEach(async ({ app }) => {
+  test.beforeEach(async ({ page, app }) => {
     // Arrange
-    await app.configureVehicle.open();
+    await app.hero.open()
+    await page.getByRole('link', { name: /Configure Agora/i }).click()
   });
 
   test('Deve atualizar o preço ao selecionar somente a opção "Precision Park"', async ({ app, page }) => {
