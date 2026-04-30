@@ -24,7 +24,7 @@ export function createConfigureVehicleActions(page: Page) {
       await expect(priceElement).toHaveText(price)
     },
 
-    async validateCarImage(imageSrc: string) {
+    async validateCarImage(imageSrc: string | RegExp) {
       const imageCar = page.locator('img[alt^="Velô Sprint"]');
       await expect(imageCar).toHaveAttribute('src', imageSrc);
     },
