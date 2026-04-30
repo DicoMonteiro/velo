@@ -188,4 +188,23 @@ npm run lint     # Verificar código
   
   yarn playwright show-report
     #Runs the report about tests
+
+  yarn playwright test --workers=2
+    #Runs the tests with 2 workers
+
+  yarn playwright test --workers=2 --project=chromium
+    #Runs the tests with 2 workers and only on Desktop Chrome
+
+  yarn playwright test --workers=2 --project=chromium --headed
+    #Runs the tests with 2 workers and only on Desktop Chrome with browser open
+
+  yarn playwright test --workers=2 --project=chromium --headed --debug
+    #Runs the tests with 2 workers and only on Desktop Chrome with browser open and debug mode
+
+  yarn playwright test --workers=2 --project=chromium --headed --debug --ui
+    #Runs the tests with 2 workers and only on Desktop Chrome with browser open and debug mode and interactive UI mode
+  
+  yarn playwright test --shards=2/3
+    #Runs the tests with 2 workers and only on Desktop Chrome with browser open and debug mode and interactive UI mode and shards
+    
 ```

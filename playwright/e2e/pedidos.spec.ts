@@ -4,7 +4,7 @@ import { SearchOrderPage } from "../support/pages/SearchOrderPage"
 
 // AAA - Arrange, Act, Assert
 
-test.describe("Consulta de Pedido", ()=> {
+test.describe("Consulta de Pedido", () => {
 
   let search: SearchOrderPage;
   //test.beforeAll(async () => {
@@ -13,13 +13,13 @@ test.describe("Consulta de Pedido", ()=> {
 
   test.beforeEach(async ({ page }) => {
     //console.log("beforeEach: roda uma vez antes de cada teste")
-     //Arrange
-     await page.goto('http://localhost:5173/');
-     await expect(page.getByTestId('hero-section').getByRole('heading')).toContainText('Velô Sprint');
-     await page.getByRole('link', { name: 'Consultar Pedido' }).click();
-     await expect(page.getByRole('heading')).toContainText('Consultar Pedido');
+    //Arrange
+    await page.goto('/');
+    await expect(page.getByTestId('hero-section').getByRole('heading')).toContainText('Velô Sprint');
+    await page.getByRole('link', { name: 'Consultar Pedido' }).click();
+    await expect(page.getByRole('heading')).toContainText('Consultar Pedido');
 
-     search = new SearchOrderPage(page);
+    search = new SearchOrderPage(page);
   })
 
   //test.afterEach(async () => {
@@ -49,7 +49,7 @@ test.describe("Consulta de Pedido", ()=> {
         amount: 'R$ 52.500,00'
       }
     }
-  
+
     //Act
     //await page.getByTestId('search-order-id').dblclick();
     //await page.getByTestId('search-order-id').fill(order.code);
@@ -62,11 +62,11 @@ test.describe("Consulta de Pedido", ()=> {
     //await page.getByLabel('Número do Pedido').fill('VLO-OPHS0J');
     //await page.getByPlaceholder('Ex: VLO-ABC123').fill('VLO-OPHS0J');
     //await page.getByTestId('search-order-button').click();
-    
+
 
     //const search = new SearchOrderPage(page)
     await search.searchOrder(order.code)
-  
+
     //Assert - Checkpoint
     //await page.waitForTimeout(10000);
     //await expect(page.getByTestId('order-result-id')).toBeVisible({ timeout: 60000 });
@@ -124,7 +124,7 @@ test.describe("Consulta de Pedido", ()=> {
     await expect(svgIcon).toBeVisible({ timeout: 60000 });
     await expect(svgIcon).toHaveClass(/lucide-circle-check-big/);
     await expect(svgIcon).toContainClass('lucide-circle-check-big');
-   
+
   });
 
   test('deve consultar um pedido reprovado', async ({ page }) => {
@@ -152,7 +152,7 @@ test.describe("Consulta de Pedido", ()=> {
 
     //const search = new SearchOrderPage(page)
     await search.searchOrder(order.code)
-  
+
     //Assert - Checkpoint
     await expect(page.getByTestId(`order-result-${order.code}`)).toMatchAriaSnapshot(`
       - img
@@ -184,17 +184,17 @@ test.describe("Consulta de Pedido", ()=> {
       - paragraph: /R\\$ \\d+\\.\\d+,\\d+/
       `, { timeout: 60000 });
 
-      const statusBadge = page.getByRole('status').filter({ hasText: order.status });
-      await expect(statusBadge).toBeVisible({ timeout: 60000 });
-      await expect(statusBadge).toContainText(order.status);
-      await expect(statusBadge).toHaveClass(/bg-red-100/);
-      await expect(statusBadge).toContainClass('bg-red-100');
-      await expect(statusBadge).toContainClass('text-red-700');
-  
-      const svgIcon = statusBadge.locator('svg');
-      await expect(svgIcon).toBeVisible({ timeout: 60000 });
-      await expect(svgIcon).toHaveClass(/lucide-circle-x/);
-      await expect(svgIcon).toContainClass('lucide-circle-x');
+    const statusBadge = page.getByRole('status').filter({ hasText: order.status });
+    await expect(statusBadge).toBeVisible({ timeout: 60000 });
+    await expect(statusBadge).toContainText(order.status);
+    await expect(statusBadge).toHaveClass(/bg-red-100/);
+    await expect(statusBadge).toContainClass('bg-red-100');
+    await expect(statusBadge).toContainClass('text-red-700');
+
+    const svgIcon = statusBadge.locator('svg');
+    await expect(svgIcon).toBeVisible({ timeout: 60000 });
+    await expect(svgIcon).toHaveClass(/lucide-circle-x/);
+    await expect(svgIcon).toContainClass('lucide-circle-x');
   });
 
   test('deve consultar um pedido em analise', async ({ page }) => {
@@ -222,7 +222,7 @@ test.describe("Consulta de Pedido", ()=> {
 
     //const search = new SearchOrderPage(page)
     await search.searchOrder(order.code)
-  
+
     //Assert - Checkpoint
     await expect(page.getByTestId(`order-result-${order.code}`)).toMatchAriaSnapshot(`
       - img
@@ -254,23 +254,23 @@ test.describe("Consulta de Pedido", ()=> {
       - paragraph: /R\\$ \\d+\\.\\d+,\\d+/
       `, { timeout: 60000 });
 
-      const statusBadge = page.getByRole('status').filter({ hasText: order.status });
-      await expect(statusBadge).toBeVisible({ timeout: 60000 });
-      await expect(statusBadge).toContainText(order.status);
-      await expect(statusBadge).toHaveClass(/bg-amber-100/);
-      await expect(statusBadge).toContainClass('bg-amber-100');
-      await expect(statusBadge).toContainClass('text-amber-700');
-  
-      const svgIcon = statusBadge.locator('svg');
-      await expect(svgIcon).toBeVisible({ timeout: 60000 });
-      await expect(svgIcon).toHaveClass(/lucide-circle-clock/);
-      await expect(svgIcon).toContainClass('lucide-circle-clock');
+    const statusBadge = page.getByRole('status').filter({ hasText: order.status });
+    await expect(statusBadge).toBeVisible({ timeout: 60000 });
+    await expect(statusBadge).toContainText(order.status);
+    await expect(statusBadge).toHaveClass(/bg-amber-100/);
+    await expect(statusBadge).toContainClass('bg-amber-100');
+    await expect(statusBadge).toContainClass('text-amber-700');
+
+    const svgIcon = statusBadge.locator('svg');
+    await expect(svgIcon).toBeVisible({ timeout: 60000 });
+    await expect(svgIcon).toHaveClass(/lucide-circle-clock/);
+    await expect(svgIcon).toContainClass('lucide-circle-clock');
   });
-  
+
   test("deve exibir mensagem quando o pedido não é encontrado", async ({ page }) => {
     // Test Data
     const order = generateOrderCode();
-  
+
     //Act
     //await page.getByTestId('search-order-id').dblclick();
     //await page.getByTestId('search-order-id').fill(order);
@@ -278,14 +278,14 @@ test.describe("Consulta de Pedido", ()=> {
 
     //const search = new SearchOrderPage(page)
     await search.searchOrder(order)
-  
+
     //Assert - Checkpoint
     await expect(page.getByRole('heading', { name: 'Pedido não encontrado' })).toBeVisible({ timeout: 15000 })
-    
+
     const containerPedidoNaoEncontrado = page.getByRole("heading")
-    .filter({hasText: /^Pedido não encontrado$/})
-    .locator("..")
-  
+      .filter({ hasText: /^Pedido não encontrado$/ })
+      .locator("..")
+
     await expect(containerPedidoNaoEncontrado).toContainText("Verifique o número do pedido e tente novamente", { timeout: 15000 })
     await expect(page.locator("p", { hasText: "Verifique o número do pedido e tente novamente" })).toBeVisible({ timeout: 15000 })
     await expect(page.locator('#root')).toMatchAriaSnapshot(`
