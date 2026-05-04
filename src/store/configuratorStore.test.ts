@@ -1,5 +1,5 @@
-import { describe, it, expect } from 'vitest';
-import { calculateTotalPrice, calculateInstallment, formatPrice, CarConfiguration } from './configuratorStore';
+import { describe, it, expect, beforeEach } from 'vitest';
+import { calculateTotalPrice, calculateInstallment, formatPrice, CarConfiguration, useConfiguratorStore } from './configuratorStore';
 
 describe('configuratorStore pure functions', () => {
   describe('calculateTotalPrice', () => {
@@ -71,6 +71,85 @@ describe('configuratorStore pure functions', () => {
       
       expect(normalizedString).toContain('40.000,00');
       expect(normalizedString).toContain('R$');
+    });
+  });
+});
+
+describe('configuratorStore actions', () => {
+  beforeEach(() => {
+    // Reset store before each test
+    useConfiguratorStore.setState({
+      configuration: { exteriorColor: 'glacier-blue', interiorColor: 'carbon-black', wheelType: 'aero', optionals: [] },
+      orders: [],
+      currentUserEmail: null,
+    });
+  });
+
+  describe('toggleOptional', () => {
+    it('should add an optional feature if it is not present', () => {
+      const store = useConfiguratorStore.getState();
+      expect(store.configuration.optionals).not.toContain('precision-park');
+      
+      store.toggleOptional('precision-park');
+      
+      const updatedStore = useConfiguratorStore.getState();
+      expect(updatedStore.configuration.optionals).toContain('precision-park');
+    });
+
+    it('should remove an optional feature if it is already present', () => {
+      // Setup initial state
+      useConfiguratorStore.setState({
+        configuration: { 
+          exteriorColor: 'glacier-blue', 
+          interiorColor: 'carbon-black', 
+          wheelType: 'aero', 
+          optionals: ['flux-capacitor'] 
+        }
+      });
+      
+      const store = useConfiguratorStore.getState();
+      expect(store.configuration.optionals).toContain('flux-capacitor');
+      
+      store.toggleOptional('flux-capacitor');
+      
+      const updatedStore = useConfiguratorStore.getState();
+      expect(updatedStore.configuration.optionals).not.toContain('flux-capacitor');
+    });
+  });
+
+  describe('login', () => {
+    const mockOrder = {
+      id: 'VLO-123',
+      configuration: { exteriorColor: 'glacier-blue', interiorColor: 'carbon-black', wheelType: 'aero', optionals: [] },
+      totalPrice: 40000,
+      customer: { name: 'John', lastname: 'Doe', email: 'john@example.com', phone: '123', cpf: '123', store: 'A' },
+      paymentMethod: 'avista',
+      status: 'APROVADO',
+      createdAt: '2023-01-01T00:00:00Z'
+    } as any;
+
+    it('should return true and set currentUserEmail if orders with that email exist', () => {
+      useConfiguratorStore.setState({
+        orders: [mockOrder]
+      });
+
+      const store = useConfiguratorStore.getState();
+      const loginSuccess = store.login('john@example.com');
+
+      expect(loginSuccess).toBe(true);
+      expect(useConfiguratorStore.getState().currentUserEmail).toBe('john@example.com');
+    });
+
+    it('should return false and not set currentUserEmail if no orders with that email exist', () => {
+      useConfiguratorStore.setState({
+        orders: [mockOrder]
+      });
+
+      const store = useConfiguratorStore.getState();
+      const loginSuccess = store.login('nope@example.com');
+
+      expect(loginSuccess).toBe(false);
+      expect(useConfiguratorStore.getState().currentUserEmail).toBe(null);
     });
   });
 });
