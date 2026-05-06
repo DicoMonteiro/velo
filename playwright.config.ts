@@ -50,7 +50,7 @@ export default defineConfig({
     // Quando o valor é 0, herda o limite do timeout geral do teste
     navigationTimeout: 10_000,
 
-    baseURL: 'https://velo-dicomonteiro.vercel.app'
+    baseURL: 'https://velo-489xp09yr-dicomonteiros-projects.vercel.app'
   },
 
   /* Configure projects for major browsers */
