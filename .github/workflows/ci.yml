@@ -49,7 +49,7 @@ jobs:
     needs: [unit-tests]
     runs-on: ubuntu-latest
     outputs:
-      deployment-url: ${{ steps.vercel-deploy.outputs.deployment-url }}
+      deployment-url: ${{ steps.deploy.outputs.deployment-url }}
     
     steps:
       # 1. Clona o repositório
@@ -81,7 +81,7 @@ jobs:
 
       # 7. Executa o deploy para o Vercel
       - name: Deploy Preview To Vercel
-        id: vercel-deploy
+        id: deploy
         run: | 
           URL=$(yarn --silent vercel deploy --prebuilt --target=preview --token=${{ env.VERCEL_TOKEN }} --scope=${{ env.VERCEL_SCOPE }})
           echo "deployment-url=$URL" >> $GITHUB_OUTPUT
@@ -110,23 +110,22 @@ jobs:
       - name: Install dependencies
         run: yarn install
 
-      # 5. Instala os browsers do playwright
-      - name: Install Playwright browsers
+      # 5. Instalação do Chromium
+      - name: Install Plawright Browser
         run: yarn playwright install --with-deps chromium
 
-      # 6. Executa os testes de ponta a ponta com Playwright
+      # 6. Execução dos Testes de Regressão
       - name: Run E2E Regression Tests
         run: yarn playwright test playwright/e2e/online.spec.ts
         env:
-            BASE_URL: ${{ needs.build-and-deploy.outputs.deployment-url }}
-      # 7. Gera o relatório de testes automatizados
-      - name: Generate Test Report
+          BASE_URL: ${{ needs.build-and-deploy.outputs.deployment-url }}
+
+      # 7. Relatório de Testes Automatizados
+      - name: Upload Playwright report
         if: ${{ !cancelled() }}
         uses: actions/upload-artifact@v7.0.1
         with:
           name: playwright-report
-          path: playwright-report
-          retention-days: 30
       
       
 
