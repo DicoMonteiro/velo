@@ -133,6 +133,7 @@ jobs:
         uses: actions/upload-artifact@v7.0.1
         with:
           name: playwright-report
+          path: playwright-report
       
       
 
