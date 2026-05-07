@@ -50,9 +50,9 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       deployment-url: ${{ steps.deploy.outputs.deployment-url }}
-    
+
     steps:
-      # 1. Clona o repositório
+      # 1. Faz checkout do código do repositório
       - name: Checkout repository
         uses: actions/checkout@v6.0.2
 
@@ -66,24 +66,23 @@ jobs:
       - name: Enable Corepack
         run: corepack enable
 
-      # 4. Instala as dependências com base no yarn.lock
+      # 4. Instala as dependências do projeto
       - name: Install dependencies
         run: yarn install
 
-      # 5. Obter as configurações do projeto
+      # 5. Obter as configurações do vercel
       - name: Pull Vercel Config
-        run: yarn vercel pull --yes --environment=preview --token=${{ env.VERCEL_TOKEN }} --scope=${{ env.VERCEL_SCOPE }}
-          
+        run: yarn vercel pull --yes --environment=preview --token=$VERCEL_TOKEN --scope=$VERCEL_SCOPE
 
-      # 6. Executa o build para o Vercel
-      - name: Build for Vercel
-        run: yarn vercel build --token=${{ env.VERCEL_TOKEN }}
+      # 6. Build para o Vercel
+      - name: Build Vercel
+        run: yarn vercel build --token=$VERCEL_TOKEN
 
-      # 7. Executa o deploy para o Vercel
-      - name: Deploy Preview To Vercel
+      # 7. Deploy preview no vercel
+      - name: Deploy preview
         id: deploy
-        run: | 
-          URL=$(yarn --silent vercel deploy --prebuilt --target=preview --token=${{ env.VERCEL_TOKEN }} --scope=${{ env.VERCEL_SCOPE }})
+        run: |
+          URL=$(yarn --silent vercel deploy --prebuilt --target=preview --token=$VERCEL_TOKEN --scope=$VERCEL_SCOPE)
           echo "deployment-url=$URL" >> $GITHUB_OUTPUT
 
   e2e-tests:
