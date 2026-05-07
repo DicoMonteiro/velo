@@ -49,7 +49,7 @@ jobs:
     needs: [unit-tests]
     runs-on: ubuntu-latest
     outputs:
-      deployment-url: ${{ steps.deploy.outputs.deployment-url }}
+      tests-url: ${{ steps.deploy.outputs.deployment-url }}
 
     steps:
       # 1. Faz checkout do código do repositório
@@ -89,6 +89,10 @@ jobs:
       - name: Verificar Valor no Log
         run: echo "O valor do output eh ${{ steps.deploy.outputs.deployment-url }}"
 
+      # 8. Verificar Valor no Log
+      - name: Verificar Valor2 no Log
+        run: echo "O valor do output eh ${{ steps.deploy.outputs.tests-url }}"
+
   e2e-tests:
     name: Run E2E Tests
     needs: [build-and-deploy]
@@ -119,7 +123,7 @@ jobs:
 
       # 8. Verificar Valor no Log
       - name: Verificar Valor no Log
-        run: echo "O valor do output eh ${{ needs.build-and-deploy.outputs.deployment-url }}"
+        run: echo "O valor do output eh ${{ needs.build-and-deploy.outputs.tests-url }}"
       
       
 
