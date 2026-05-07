@@ -12,8 +12,8 @@ env:
   # Variáveis de ambiente utilizadas no workflow
   NODE_VERSION: '24'
   VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
   VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
   VERCEL_SCOPE: ${{ secrets.VERCEL_SCOPE }}
   
 jobs:
@@ -49,7 +49,7 @@ jobs:
     needs: [unit-tests]
     runs-on: ubuntu-latest
     outputs:
-      deployment-url: ${{ steps.deploy.outputs.deployment-url }}
+      vercel-preview-url: ${{ steps.deploy.outputs.deployment-url }}
 
     steps:
       # 1. Faz checkout do código do repositório
@@ -117,7 +117,7 @@ jobs:
       - name: Run E2E Regression Tests
         run: yarn playwright test playwright/e2e/online.spec.ts
         env:
-          BASE_URL: ${{ needs.build-and-deploy.outputs.deployment-url }}
+          BASE_URL: ${{ needs.build-and-deploy.outputs.vercel-preview-url }}
 
       # 7. Relatório de Testes Automatizados
       - name: Upload Playwright report
