@@ -91,7 +91,7 @@ jobs:
 
       # 8. Verificar Valor no Log
       - name: Verificar Valor2 no Log
-        run: echo "O valor do output eh ${{ steps.deploy.outputs.tests-url }}"
+        run: echo "O valor do output eh ${{ needs.build-and-deploy.outputs.tests-url }}"
 
   e2e-tests:
     name: Run E2E Tests
