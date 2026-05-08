@@ -1,7 +1,7 @@
 # Workflow de Integração Contínua focado em testes unitários
 # Estrutura preparada para expansão futura (ex: novos jobs, stages, ambientes)
 
-name: Continuous Integration
+name: Continuous Deployment
 
 on:
   push:
@@ -72,7 +72,11 @@ jobs:
 
       # 5. Obter as configurações do vercel
       - name: Pull Vercel Config
-        run: yarn vercel pull --yes --environment=preview --token=$VERCEL_TOKEN --scope=$VERCEL_SCOPE
+        run: |
+          yarn vercel pull --yes \
+          --environment=preview \
+          --token=$VERCEL_TOKEN \
+          --scope=$VERCEL_SCOPE
 
       # 6. Build para o Vercel
       - name: Build Vercel
@@ -82,16 +86,11 @@ jobs:
       - name: Deploy preview
         id: deploy
         run: |
-          URL=$(yarn --silent vercel deploy --prebuilt --target=preview --token=$VERCEL_TOKEN --scope=$VERCEL_SCOPE)
+          URL=$(yarn --silent vercel deploy --prebuilt \
+          --target=preview \
+          --token=$VERCEL_TOKEN \
+          --scope=$VERCEL_SCOPE)
           echo "deployment-url=$URL" >> $GITHUB_OUTPUT
-          
-      # 8. Verificar Valor no Log
-      - name: Verificar Valor no Log
-        run: echo "O valor do output eh ${{ steps.deploy.outputs.deployment-url }}"
-
-      # 8. Verificar Valor no Log
-      - name: Verificar Valor2 no Log
-        run: echo "O valor do output eh ${{ needs.build-and-deploy.outputs.tests-url }}"
 
   e2e-tests:
     name: Run E2E Tests
@@ -134,6 +133,20 @@ jobs:
         with:
           name: playwright-report
           path: playwright-report
+
+  promote:
+    name: Promote to Production
+    needs: [e2e-tests]
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Vercel promote
+        run: | 
+          yarn vercel promote ${{ needs.build-and-deploy.outputs.vercel-preview-url }} \
+          --token=$VERCEL_TOKEN \
+          --scope=$VERCEL_SCOPE \
+          --yes
+        
       
       
 

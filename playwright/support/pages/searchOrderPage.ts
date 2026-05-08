@@ -1,8 +1,8 @@
 import { Page, expect } from "@playwright/test"
 
 export class SearchOrderPage {
-  constructor(private page: Page) {}
-  
+  constructor(private page: Page) { }
+
   async searchOrder(numero: string) {
     await this.page.getByRole('textbox', { name: 'Número do Pedido' }).fill(numero)
     await this.page.getByRole('button', { name: 'Buscar Pedido' }).click()
@@ -57,11 +57,11 @@ export class SearchOrderPage {
   async validateNotFoundOrder() {
 
     await expect(this.page.getByRole('heading', { name: 'Pedido não encontrado' })).toBeVisible({ timeout: 15000 })
-    
+
     const containerPedidoNaoEncontrado = this.page.getByRole("heading")
-      .filter({hasText: /^Pedido não encontrado$/})
+      .filter({ hasText: /^Pedido não encontrado$/ })
       .locator("..")
-  
+
     await expect(containerPedidoNaoEncontrado).toContainText("Verifique o número do pedido e tente novamente", { timeout: 15000 })
     await expect(this.page.locator("p", { hasText: "Verifique o número do pedido e tente novamente" })).toBeVisible({ timeout: 15000 })
     await expect(this.page.locator('#root')).toMatchAriaSnapshot(`
@@ -70,5 +70,5 @@ export class SearchOrderPage {
       - paragraph: Verifique o número do pedido e tente novamente
     `);
   }
-    
+
 }
