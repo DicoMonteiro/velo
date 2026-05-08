@@ -1,8 +1,8 @@
 import { test as base, expect } from '@playwright/test';
-import { SearchOrderPage } from '../support/pages/SearchOrderPage';
-import { HomePage } from '../support/pages/HomePage';
-import { NavBar } from "../support/components/NavBar";
-import { ConfigureVehiclePage } from '../support/pages/ConfigureVehiclePage';
+import { SearchOrderPage } from '../support/pages/searchOrderPage';
+import { HomePage } from '../support/pages/homePage';
+import { NavBar } from "../support/components/navBar";
+import { ConfigureVehiclePage } from '../support/pages/configureVehiclePage';
 
 type PageFixtures = {
   searchOrderPage: SearchOrderPage;
