@@ -113,10 +113,6 @@ jobs:
       - name: Enable Corepack
         run: corepack enable
 
-      # 4. Remover node_modules
-      - name: Remove Node Modules
-        run: rm -rf node_modules
-
       # 4. Instala as dependências com base no yarn.lock
       - name: Install dependencies
         run: yarn install
