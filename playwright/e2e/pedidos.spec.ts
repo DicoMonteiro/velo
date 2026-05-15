@@ -2,6 +2,8 @@ import { test, expect } from '@playwright/test';
 import { generateOrderCode } from "../support/helpers"
 import { SearchOrderPage } from "../support/pages/searchOrderPage"
 
+const isPreview = process.env.VITE_VERCEL_ENV !== 'production' && process.env.TEST_ENV !== 'production';
+
 // AAA - Arrange, Act, Assert
 
 test.describe("Consulta de Pedido", () => {
@@ -33,7 +35,22 @@ test.describe("Consulta de Pedido", () => {
 
   test('deve consultar um pedido aprovado', async ({ page }) => {
     // Test Data
-    const order = {
+    const order = isPreview ? {
+      code: 'VLO-OPHS12',
+      status: 'APROVADO',
+      model: 'Velô Sprint',
+      color: 'Midnight Black',
+      interior: 'cream',
+      wheels: 'sport Wheels',
+      customer: {
+        name: 'Pedro Amado',
+        email: 'pedro.amado@qax.com.br'
+      },
+      payment: {
+        method: 'À Vista',
+        amount: 'R$ 52.500,00'
+      }
+    } : {
       code: 'VLO-OPHS0J',
       status: 'APROVADO',
       model: 'Velô Sprint',
@@ -48,7 +65,8 @@ test.describe("Consulta de Pedido", () => {
         method: 'À Vista',
         amount: 'R$ 52.500,00'
       }
-    }
+    };
+
 
     //Act
     //await page.getByTestId('search-order-id').dblclick();
@@ -129,7 +147,23 @@ test.describe("Consulta de Pedido", () => {
 
   test('deve consultar um pedido reprovado', async ({ page }) => {
     // Test Data
-    const order = {
+    // Test Data
+    const order = isPreview ? {
+      code: 'VLO-165ZAA',
+      status: 'REPROVADO',
+      model: 'Velô Sprint',
+      color: 'Lunar White',
+      interior: 'cream',
+      wheels: 'aero Wheels',
+      customer: {
+        name: 'Apolo Vale',
+        email: 'apolo.vale@teste.com.br'
+      },
+      payment: {
+        method: 'À Vista',
+        amount: 'R$ 45.000,00'
+      }
+    } : {
       code: 'VLO-165ZEY',
       status: 'REPROVADO',
       model: 'Velô Sprint',
@@ -144,7 +178,7 @@ test.describe("Consulta de Pedido", () => {
         method: 'À Vista',
         amount: 'R$ 45.000,00'
       }
-    }
+    };
     //Act
     //await page.getByTestId('search-order-id').dblclick();
     //await page.getByTestId('search-order-id').fill(order.code);
@@ -199,7 +233,23 @@ test.describe("Consulta de Pedido", () => {
 
   test('deve consultar um pedido em analise', async ({ page }) => {
     // Test Data
-    const order = {
+    // Test Data
+    const order = isPreview ? {
+      code: 'VLO-BXFH1D',
+      status: 'EM_ANALISE',
+      model: 'Velô Sprint',
+      color: 'Lunar White',
+      interior: 'cream',
+      wheels: 'aero Wheels',
+      customer: {
+        name: 'Marcus Antunes',
+        email: 'marcus.antunes@teste.com.br'
+      },
+      payment: {
+        method: 'À Vista',
+        amount: 'R$ 40.000,00'
+      }
+    } : {
       code: 'VLO-BXFHDZ',
       status: 'EM_ANALISE',
       model: 'Velô Sprint',
@@ -214,7 +264,7 @@ test.describe("Consulta de Pedido", () => {
         method: 'À Vista',
         amount: 'R$ 40.000,00'
       }
-    }
+    };
     //Act
     //await page.getByTestId('search-order-id').dblclick();
     //await page.getByTestId('search-order-id').fill(order.code);

@@ -168,6 +168,12 @@ npm run lint     # Verificar código
   yarn playwright test
     #Runs the end-to-end tests.
 
+  VITE_VERCEL_ENV=preview yarn playwright test
+    #Runs the end-to-end tests against the Preview environment (Database & Keys).
+
+  VITE_VERCEL_ENV=production yarn playwright test
+    #Runs the end-to-end tests against the Production environment (Database & Keys).
+
   yarn playwright test --ui
     #Starts the interactive UI mode.
 
